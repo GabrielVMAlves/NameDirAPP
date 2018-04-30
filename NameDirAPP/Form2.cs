@@ -16,7 +16,7 @@ namespace NameDirAPP
     public partial class Form2 : Form
     {
         string originPath;
-        string userPath = Environment.GetEnvironmentVariable("userprofile");
+        string userPath;
         public Form2()
         {
             InitializeComponent();
@@ -45,8 +45,6 @@ namespace NameDirAPP
             }
             else
             {
-                originPath = userPath;
-                originPath += @"\AppData\Local\Temp";
                 MessageBox.Show(originPath);
                 createBatch(path, newPath);
             }
@@ -56,7 +54,7 @@ namespace NameDirAPP
         {
             string initial = t;
             string final;
-            final = Regex.Replace(initial.Normalize(NormalizationForm.FormD), "[^A-Za-z0-9 | ]", string.Empty);
+            final = Regex.Replace(initial.Normalize(NormalizationForm.FormD), "[^A-Za-z0-9_ | ]", string.Empty);
             final = final.Replace(" ", @"_");
             MessageBox.Show(final);
 
@@ -67,11 +65,15 @@ namespace NameDirAPP
         {
             try
             {
-                stringTreatment(o);
+                userPath = Environment.GetEnvironmentVariable("userprofile");
+                originPath = "";
+                originPath = userPath+""+@"\AppData\Local\Temp";
+                n = stringTreatment(n);
+
                 System.IO.StreamWriter sw = new StreamWriter(originPath + "\\" + "MeuArquivo.bat", false);
                 userPath = userPath.Remove(0, 2);
                 sw.WriteLine("@echo");
-                sw.WriteLine("c:");
+                sw.WriteLine(@"CD C:\");
                 sw.WriteLine("cd "+userPath+@"\Desktop");
                 sw.WriteLine("REN "+o+" "+n);
                 sw.WriteLine("pause");
@@ -80,10 +82,10 @@ namespace NameDirAPP
                 Process processo = new Process();
                 processo.StartInfo.FileName = originPath + "\\" + "MeuArquivo.bat";
                 processo.Start();
+                //System.IO.File.Delete(originPath + "\\" + "MeuArquivo.bat");
             }
             catch (Exception e)
             {
-                
                 MessageBox.Show(e.Message);
             }
         }
