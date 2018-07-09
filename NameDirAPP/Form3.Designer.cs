@@ -43,7 +43,7 @@
             this.txtCod.Location = new System.Drawing.Point(370, 101);
             this.txtCod.Name = "txtCod";
             this.txtCod.Size = new System.Drawing.Size(101, 26);
-            this.txtCod.TabIndex = 14;
+            this.txtCod.TabIndex = 12;
             // 
             // label3
             // 
@@ -61,7 +61,7 @@
             this.txtName.Location = new System.Drawing.Point(236, 154);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(377, 26);
-            this.txtName.TabIndex = 12;
+            this.txtName.TabIndex = 13;
             // 
             // txtPath
             // 
@@ -77,7 +77,7 @@
             this.btnNewDir.Location = new System.Drawing.Point(370, 221);
             this.btnNewDir.Name = "btnNewDir";
             this.btnNewDir.Size = new System.Drawing.Size(101, 46);
-            this.btnNewDir.TabIndex = 10;
+            this.btnNewDir.TabIndex = 14;
             this.btnNewDir.Text = "Criar Diretorio";
             this.btnNewDir.UseVisualStyleBackColor = true;
             this.btnNewDir.Click += new System.EventHandler(this.btnNewDir_Click);

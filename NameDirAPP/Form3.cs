@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IWshRuntimeLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,7 +46,14 @@ namespace NameDirAPP
             }
             else
             {
-                MessageBox.Show(path + " " + cod + " " + nameDir + "!");
+                try
+                {
+                    createFolders(cod, nameDir, path);
+                }catch(Exception k)
+                {
+                    MessageBox.Show(k.Message);
+                }
+                
             }
         }
 
@@ -55,33 +63,32 @@ namespace NameDirAPP
             string final;
             final = Regex.Replace(initial.Normalize(NormalizationForm.FormD), "[^A-Za-z0-9 | ]", string.Empty);
             final = final.Replace(" ", @"_");
-            MessageBox.Show(final);
 
             return final;
         }
 
-        public void createBatch(string o, string n)
+        public void createFolders(string cod, string nameDir, string path)
         {
+            cod = stringTreatment(cod);
+            nameDir = stringTreatment(nameDir);
+            path = stringTreatment(path);
+            string teste = @"C:\"+path+@"\"+cod+"_"+nameDir;
+            string teste1 = @"d:\" + path + @"\" + cod + "_" + nameDir;
+            Directory.CreateDirectory(teste);
+            Directory.CreateDirectory(teste1);
+
             try
             {
-                stringTreatment(o);
-                System.IO.StreamWriter sw = new StreamWriter(originPath + "\\" + "MeuArquivo.bat", false);
-                userPath = userPath.Remove(0, 2);
-                sw.WriteLine("@echo");
-                sw.WriteLine("c:");
-                sw.WriteLine("cd " + userPath + @"\Desktop");
-                sw.WriteLine("REN " + o + " " + n);
-                sw.WriteLine("pause");
-                sw.Close();
 
-                Process processo = new Process();
-                processo.StartInfo.FileName = originPath + "\\" + "MeuArquivo.bat";
-                processo.Start();
-            }
-            catch (Exception e)
+                var wshShell = new WshShellClass();
+                string ShortcutFile = teste + ".ink";
+                string TargetPath = teste1;
+                IWshRuntimeLibrary.IWshShortcut shorcut = (IWshRuntimeLibrary.IWshShortcut)wshShell.CreateShortcut(ShortcutFile);
+                shorcut.TargetPath = TargetPath;
+                shorcut.Save();
+            }catch(Exception e)
             {
-
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message+" parte2");
             }
         }
 

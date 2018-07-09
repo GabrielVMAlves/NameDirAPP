@@ -66,7 +66,6 @@ namespace NameDirAPP
             try
             {
                 userPath = Environment.GetEnvironmentVariable("userprofile");
-                originPath = "";
                 originPath = userPath+""+@"\AppData\Local\Temp";
                 n = stringTreatment(n);
 

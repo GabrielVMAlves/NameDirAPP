@@ -43,7 +43,7 @@
             this.txtPath.Location = new System.Drawing.Point(168, 116);
             this.txtPath.Name = "txtPath";
             this.txtPath.Size = new System.Drawing.Size(383, 26);
-            this.txtPath.TabIndex = 7;
+            this.txtPath.TabIndex = 8;
             // 
             // label1
             // 
@@ -90,7 +90,7 @@
             this.txtClient.Location = new System.Drawing.Point(168, 38);
             this.txtClient.Name = "txtClient";
             this.txtClient.Size = new System.Drawing.Size(383, 26);
-            this.txtClient.TabIndex = 12;
+            this.txtClient.TabIndex = 7;
             // 
             // label3
             // 
